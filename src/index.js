@@ -22,9 +22,9 @@ var debounce = require('lodash.debounce');
 
 refs.searchForm.addEventListener('input', debounce(onSearch, 500))
 
-function onSearch(e) {
-  API.fetchCountries(e.target.value).then(quantityCheckCountries).catch(onFetchError)
-}
+// function onSearch(e) {
+//   API.fetchCountries(e.target.value).then(quantityCheckCountries).catch(onFetchError)
+// }
 
 function quantityCheckCountries(country) {
   if (country.status === 404) {
@@ -40,25 +40,29 @@ function quantityCheckCountries(country) {
     return
   }
   refs.cardContainer.innerHTML = countryTmpl(country)
-}
+};
 
 function onFetchError(err) {
   refs.cardContainer.innerHTML = ''
   alert({ text: 'Check the correctness of the data entered!' })
+};
+
+function onSearch(e) {
+  API.fetchCountry(e.target.value)
+  .then(quantityCheckCountries)
+ 
 }
 
 
-// fetchCountry(`deutschland`).then(renderCountry).catch(error => console.log(error));
 
 // function fetchCountry(countryName) {
 //   return  fetch(`https://restcountries.com/v3/name/${countryName}`)
 // .then(response => {
 //    return response.json()});
-
 // }
 
-// function renderCountry(country) {  
-//     const markup = templ(country);
-//        refs.cardContainer.innerHTML = markup;
-// };
+function renderCountry(country) {  
+    const markup = countryTmpl(country);
+       refs.cardContainer.innerHTML = markup;
+};
 

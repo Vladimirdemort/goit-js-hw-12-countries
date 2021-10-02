@@ -1,12 +1,7 @@
-const COUNTRIES_URL = "https://restcountries.com/v3/name"
+function fetchCountry(countryName) {
+    return  fetch(`https://restcountries.com/v3/name/${countryName}`)
+  .then(response => {
+     return response.json()});
+  }
 
-
-
-function fetchCountries(searchCountry) {
-    return fetch(`${COUNTRIES_URL}/${searchCountry}`).then(response => {
-        return response.json
-    })
-};
-
-
-export default { fetchCountries }
+export default { fetchCountry }
